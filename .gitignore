@@ -1,0 +1,91 @@
+# --- Android general ---
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.ap_  # prebuilt APKs
+*.dex
+*.class
+
+# --- Gradle files ---
+/.gradle/
+/build/
+/out/
+/**/build/
+
+# --- Android Studio ---
+.idea/
+*.iws
+*.ipr
+*.iml
+
+# --- Log files ---
+*.log
+
+# --- OS-specific ---
+# macOS
+*.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Keystore files ---
+*.jks
+*.keystore
+*.pem
+*.p12
+*.key
+
+# --- Crashlytics / Firebase ---
+crashlytics-build.properties
+fabric.properties
+
+# --- Google Services JSON (sensible) ---
+google-services.json
+firebase.json
+
+# --- Fastlane (si usas automatización de releases) ---
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# --- Jetpack Compose previews ---
+.ui-tooling-preview/
+
+# --- Kotlin/Java compilation ---
+*.class
+*.jar
+*.war
+*.ear
+
+# --- NDK (Native development) ---
+obj/
+
+# --- Test outputs ---
+/test-output/
+*/test-results/
+*.ec
+
+# --- Lint/intermediates ---
+lint/intermediates/
+lint/generated/
+
+# --- Generated folders ---
+generated/
+.kotlinc/
+
+# --- VS Code (si usas este editor) ---
+.vscode/
+
+# --- Others ---
+*.orig
+*.rej
