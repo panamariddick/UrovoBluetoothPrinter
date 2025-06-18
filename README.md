@@ -2,6 +2,10 @@
 
 **BluetoothPrinterLib** es una biblioteca para impresión Bluetooth en Android. Permite conectar a impresoras térmicas, enviar texto, imágenes y códigos QR de forma sencilla y eficiente.
 
+## 💎 AAR Library
+
+**AAR Library: https://github.com/panamariddick/LibreriaUrovoPrinterAAR
+
 ## 🚀 Ejemplo de Uso
 
 ```kotlin
