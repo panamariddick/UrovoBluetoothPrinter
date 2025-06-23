@@ -1,5 +1,11 @@
 package pa.com.purpleponydev.bluetoothprinterlib
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import java.io.OutputStream
+
 data class PrintConfig(
     var xStart: Int = 30,
     var yStart: Int = 400,
@@ -15,15 +21,6 @@ data class PrintConfig(
     var logoName: String = "logo", // Nombre de imagen en memoria de la impresora
     val labelHeightMin: Int = 300
 )
-//Debemos instancias la clase PrintConfig asi donde la vayamos a usar ya que es un parametro dentro de los metodos asi:
-//val config = PrintConfig(
-//    useLogo = true,       // Activamos el logo
-//    logoName = "logo",    // Nombre de la imagen precargada
-//    fontHeight = 24,
-//    fontWidth = 12,
-//    xStart = 30,
-//    yStart = 50
-//)
 
 fun StringBuilder.addTextLine(
     text: String,
@@ -174,8 +171,52 @@ fun StringBuilder.addLogoFromZplFile(config: PrintConfig, logoZplRaw: String, lo
     config.yStart += logoHeight + 30
 }
 
+fun StringBuilder.addTextAt(
+    x: Int,
+    text: String,
+    config: PrintConfig
+) {
+    append("^FO$x,${config.yStart}^FD$text^FS\n")
+}
 
+fun StringBuilder.addLineWithColumns(
+    texts: List<Pair<Int, String>>, // lista de (x, texto)
+    config: PrintConfig
+) {
+    texts.forEach { (x, text) ->
+        addTextAt(x, text, config)
+    }
+    config.yStart += config.lineHeight // Avanza la línea vertical
+}
 
+fun StringBuilder.addLabelValueLine(
+    label: String,
+    value: Double,
+    config: PrintConfig,
+    xValue: Int = 400,
+    widthFill: Int = 6
+) {
+    append("^FO${config.xStart},${config.yStart}^FD$label^FS\n")
+    append("^FO${xValue},${config.yStart}^FD${fill(String.format("%.2f", value), widthFill, 0)}^FS\n")
+    config.yStart += config.lineHeight
+}
+
+fun StringBuilder.addSimplePaymentLine(
+    label: String,
+    amount: Double,
+    config: PrintConfig
+) {
+    append("^FO${config.xStart},${config.yStart}^FD$label:^FS\n")
+    append("^FO400,${config.yStart}^FD${"%.2f".format(amount)}^FS\n")
+    config.yStart += config.lineHeight
+}
+fun fill(text: String, length: Int, align: Int): String {
+    return when (align) {
+        0 -> text.padEnd(length, ' ') // Alineado a la izquierda
+        1 -> text.padStart(length, '0') // Alineado a la derecha con ceros
+        else -> text
+    }
+}
 
 
 
