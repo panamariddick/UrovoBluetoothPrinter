@@ -38,7 +38,7 @@ class BluetoothPrinterLib(
             outputStream?.closeQuietly()
             bluetoothSocket?.closeQuietly()
         } catch (e: IOException) {
-            Timber.e("*----> Mensaje||Message: "+R.string.error_closing_printer_connection)
+            Timber.e("*----> Mensaje||Message: "+ R.string.error_closing_printer_connection)
         }
     }
     private fun OutputStream?.closeQuietly() {

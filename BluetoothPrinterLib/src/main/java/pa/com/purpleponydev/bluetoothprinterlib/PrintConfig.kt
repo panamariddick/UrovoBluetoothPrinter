@@ -42,7 +42,6 @@ fun StringBuilder.addTextLine(
     }
 }
 
-
 fun StringBuilder.addDivider(config: PrintConfig) {
     append("^FO${config.xStart},${config.yStart}^GB500,4,1^FS")
     config.yStart += config.lineHeight
@@ -153,10 +152,6 @@ fun readZplLogoFromAssets(context: Context, fileName: String): String {
     return context.assets.open(fileName).bufferedReader().use { it.readText() }
 }
 
-//Usa esta funcion pasando sus parametros donde armas la factura: zplBuilder.addLogoFromZplFile(config, zplLogo, logoHeight = 220)
-//la imagen debe estar en dimensiones no mayor a 200x200 para mejor control de la impresion.
-//el zplLogo lo obtienes de un logo.txt que debes generar a partir de una imagen pasandola por labelary recuerda no agregarle etiquetas de visualizacion XA XZ ya que estamos haciendo un append a la etiqueta ya existente.
-// val zplLogo = readZplLogoFromAssets(requireContext(), "logo.txt")
 fun StringBuilder.addLogoFromZplFile(config: PrintConfig, logoZplRaw: String, logoHeight: Int) {
     if (!config.useLogo) return
 
@@ -189,34 +184,7 @@ fun StringBuilder.addLineWithColumns(
     config.yStart += config.lineHeight // Avanza la línea vertical
 }
 
-fun StringBuilder.addLabelValueLine(
-    label: String,
-    value: Double,
-    config: PrintConfig,
-    xValue: Int = 400,
-    widthFill: Int = 6
-) {
-    append("^FO${config.xStart},${config.yStart}^FD$label^FS\n")
-    append("^FO${xValue},${config.yStart}^FD${fill(String.format("%.2f", value), widthFill, 0)}^FS\n")
-    config.yStart += config.lineHeight
-}
 
-fun StringBuilder.addSimplePaymentLine(
-    label: String,
-    amount: Double,
-    config: PrintConfig
-) {
-    append("^FO${config.xStart},${config.yStart}^FD$label:^FS\n")
-    append("^FO400,${config.yStart}^FD${"%.2f".format(amount)}^FS\n")
-    config.yStart += config.lineHeight
-}
-fun fill(text: String, length: Int, align: Int): String {
-    return when (align) {
-        0 -> text.padEnd(length, ' ') // Alineado a la izquierda
-        1 -> text.padStart(length, '0') // Alineado a la derecha con ceros
-        else -> text
-    }
-}
 
 
 
